@@ -14,7 +14,12 @@ function Row({ title, fetchUrl, isLargeRow }) {
 
         async function fetchData() {
             const request = await instance.get(fetchUrl);
-            setMovies(request.data.results);
+            const filteredResults = request.data.results.filter((result) => {
+                let string = result.title.match(/Porn/gi);
+                let stringTwo = result.title.match(/Adult/gi);
+                return string === [] && stringTwo === [];
+            })
+            setMovies(filteredResults);
             return request;
         }
         fetchData();
